@@ -9,7 +9,14 @@ public class EnemyController : MonoBehaviour
     //public Transform muzzlepoint;
 	public int points;
 
-	public ScoreControl scoreScript;
+	private ScoreControl scoreScript;
+
+
+	void Start()
+	{
+		scoreScript = GameObject.Find ("FPSController").GetComponent<ScoreControl> ();	
+	}
+
 
 	// Update is called once per frame
 	void Update ()
