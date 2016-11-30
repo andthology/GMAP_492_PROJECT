@@ -7,12 +7,10 @@ public class EnemyController : MonoBehaviour
     public int damage;
     public Vector3 targetPosition;
     //public Transform muzzlepoint;
+	public int points;
 
-	// Use this for initialization
-	void Start ()
-    {
-	}
-	
+	public ScoreControl scoreScript;
+
 	// Update is called once per frame
 	void Update ()
     {
@@ -25,6 +23,8 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             Destroy(gameObject);
+
+			scoreScript.IncreaseScore(points);
         }
 
         else if (other.gameObject.CompareTag("Wall"))

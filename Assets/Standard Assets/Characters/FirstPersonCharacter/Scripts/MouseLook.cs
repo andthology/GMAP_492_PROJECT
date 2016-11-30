@@ -10,8 +10,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float XSensitivity = 2f;
         public float YSensitivity = 2f;
         public bool clampVerticalRotation = true;
-        public float MinimumX = -90F;
-        public float MaximumX = 90F;
+		public bool clampHorizontalRotation = true;
+        public float MinimumX = -50F;
+        public float MaximumX = 50F;
+		public float MaximumY = 90f;
+		public float MinimumY = -90f;
         public bool smooth;
         public float smoothTime = 5f;
         public bool lockCursor = true;
@@ -20,6 +23,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Quaternion m_CharacterTargetRot;
         private Quaternion m_CameraTargetRot;
         private bool m_cursorIsLocked = true;
+
 
         public void Init(Transform character, Transform camera)
         {
@@ -39,6 +43,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(clampVerticalRotation)
                 m_CameraTargetRot = ClampRotationAroundXAxis (m_CameraTargetRot);
 
+			if (clampHorizontalRotation)
+				m_CameraTargetRot = ClampRotationAroundYAxis (m_CameraTargetRot);
+			
             if(smooth)
             {
                 character.localRotation = Quaternion.Slerp (character.localRotation, m_CharacterTargetRot,
@@ -110,6 +117,22 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             return q;
         }
+
+		Quaternion ClampRotationAroundYAxis(Quaternion q)
+		{
+			q.x /= q.w;
+			q.y /= q.w;
+			q.z /= q.w;
+			q.w = 1.0f;
+
+			float angleY = 2.0f * Mathf.Rad2Deg * Mathf.Atan (q.y);
+
+			angleY = Mathf.Clamp (angleY, MinimumY, MaximumY);
+
+			q.y = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleY);
+
+			return q;
+		}
 
     }
 }
