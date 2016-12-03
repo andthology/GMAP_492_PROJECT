@@ -24,9 +24,9 @@ public class ScoreControl : MonoBehaviour
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		timer += Time.deltaTime;
+		timer = timer + Time.deltaTime;
 
-		timerText.text = timer.ToString ();
+        timerText.text = Mathf.RoundToInt(timer).ToString ();
 	}
 
 

@@ -14,13 +14,15 @@ public class EnemyController : MonoBehaviour
 
 	void Start()
 	{
-		scoreScript = GameObject.Find ("FPSController").GetComponent<ScoreControl> ();	
+        //Locating the gameObject holding the ScoreManager script in the scene
+		scoreScript = GameObject.Find ("GameManager").GetComponent<ScoreControl> ();	
 	}
 
 
 	// Update is called once per frame
 	void Update ()
     {
+        //moving the enemy gameObject to a Vector3 with (starting point, end point, movement speed)
         transform.position = Vector3.MoveTowards(transform.position, targetPosition/*muzzlepoint.position*/, speed * Time.deltaTime); 
 	}
 
@@ -29,6 +31,8 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
+            Destroy(other.gameObject);
+
             Destroy(gameObject);
 
 			scoreScript.IncreaseScore(points);
