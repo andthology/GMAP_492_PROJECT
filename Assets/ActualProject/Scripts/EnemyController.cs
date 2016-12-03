@@ -5,18 +5,24 @@ public class EnemyController : MonoBehaviour
 {
     public float speed;
     public int damage;
-    public Vector3 targetPosition;
     //public Transform muzzlepoint;
+    public int durability;
 	public int points;
 
-	private ScoreControl scoreScript;
+    private float distanceToTravel;
+    private Vector3 targetPosition;
+    private ScoreControl scoreScript;
 
 
 	void Start()
 	{
+        distanceToTravel = -30f;
+
+        targetPosition = new Vector3(transform.position.x, 0, transform.position.z + distanceToTravel);
+
         //Locating the gameObject holding the ScoreManager script in the scene
-		scoreScript = GameObject.Find ("GameManager").GetComponent<ScoreControl> ();	
-	}
+        scoreScript = GameObject.Find("GameManager").GetComponent<ScoreControl>();
+    }
 
 
 	// Update is called once per frame
@@ -27,15 +33,20 @@ public class EnemyController : MonoBehaviour
 	}
 
 
-    void OnTriggerEnter(Collider other)
+    int OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
             Destroy(other.gameObject);
 
-            Destroy(gameObject);
+            durability -= 1;
 
-			scoreScript.IncreaseScore(points);
+            if (durability <= 0)
+            {
+                Destroy(gameObject);
+
+                scoreScript.IncreaseScore(points);
+            }
         }
 
         else if (other.gameObject.CompareTag("Wall"))
@@ -52,5 +63,7 @@ public class EnemyController : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        return durability;
     }
 }

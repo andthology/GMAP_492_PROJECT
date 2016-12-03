@@ -14,8 +14,6 @@ public class ScoreControl : MonoBehaviour
 
 	void Start()
 	{
-		timer = 0;
-
 		score = 0;
 		SetScoreText ();
 		//winText.text = "";
@@ -27,6 +25,11 @@ public class ScoreControl : MonoBehaviour
 		timer = timer + Time.deltaTime;
 
         timerText.text = Mathf.RoundToInt(timer).ToString ();
+
+        /*if (timer <= 0)
+        {
+            EndRound();
+        } */
 	}
 
 
@@ -46,4 +49,10 @@ public class ScoreControl : MonoBehaviour
 			winText.text = "You Win!";
 		} */
 	}
+
+    /*
+    void EndRound()
+    {
+
+    }*/
 }
