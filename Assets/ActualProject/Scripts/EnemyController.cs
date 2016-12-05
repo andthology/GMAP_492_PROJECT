@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour
 
 	void Start()
 	{
-        distanceToTravel = -30f;
+        distanceToTravel = -40f;
 
         targetPosition = new Vector3(transform.position.x, 0, transform.position.z + distanceToTravel);
 
@@ -63,7 +63,9 @@ public class EnemyController : MonoBehaviour
 
             Destroy(gameObject);
         }
-
+        
         return durability;
     }
+
+
 }
