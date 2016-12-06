@@ -7,29 +7,36 @@ public class ScoreControl : MonoBehaviour
 	public Text scoreText;
 	//public Text winText;
 	public Text timerText;
-
-	public int score;
+    public int wave;
+    public int score;
 	public float timer;
+
+    private EnemySpawning spawning;
 
 
 	void Start()
 	{
+        wave = 0;
 		score = 0;
-		SetScoreText ();
-		//winText.text = "";
-	}
+		//SetScoreText ();
+        //winText.text = "";
+        //Locating the gameObject holding the EnemySpawning script in the scene
+        spawning = GetComponent<EnemySpawning>();
+
+        StartNewRound();
+    }
 
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		timer = timer + Time.deltaTime;
+		timer = timer - Time.deltaTime;
 
         timerText.text = Mathf.RoundToInt(timer).ToString ();
 
-        /*if (timer <= 0)
+        if (timer <= 0)
         {
-            EndRound();
-        } */
+            StartNewRound();
+        } 
 	}
 
 
@@ -50,9 +57,13 @@ public class ScoreControl : MonoBehaviour
 		} */
 	}
 
-    /*
-    void EndRound()
+    
+    void StartNewRound()
     {
+        wave++;
 
-    }*/
+        spawning.ResetSpawn(wave);
+
+        timer = 30f;
+    }
 }
