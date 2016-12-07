@@ -7,6 +7,8 @@ public class ScoreControl : MonoBehaviour
 	public Text scoreText;
 	//public Text winText;
 	public Text timerText;
+    public GameObject pauseImage;
+    public GameObject resumeBut;
     public int wave;
     public int score;
 	public float timer;
@@ -36,8 +38,12 @@ public class ScoreControl : MonoBehaviour
         if (timer <= 0)
         {
             StartNewRound();
-        } 
+        }
+
+        //if (Input.GetButtonDown("Pause"))
+            //PauseGame();
 	}
+
 
 
 	public void IncreaseScore(int pointAmount)
@@ -46,6 +52,8 @@ public class ScoreControl : MonoBehaviour
 
 		SetScoreText ();
 	}
+
+
 
 	void SetScoreText()
 	{
@@ -57,6 +65,7 @@ public class ScoreControl : MonoBehaviour
 		} */
 	}
 
+
     
     void StartNewRound()
     {
@@ -65,5 +74,29 @@ public class ScoreControl : MonoBehaviour
         spawning.ResetSpawn(wave);
 
         timer = 30f;
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject e in enemies)
+            Destroy (e);
+    }
+
+
+
+    void PauseGame()
+    {
+        //causes in-game time to always = 0. Stops all time-based things including FixedUpdate()
+        Time.timeScale = 0f;
+
+        //Enable the endRoundImage object
+        pauseImage.SetActive(true);
+
+        resumeBut.SetActive(true);
+    }
+
+    void ResumeGame()
+    {
+        pauseImage.SetActive(false);
+
+        Time.timeScale = 1f;
     }
 }

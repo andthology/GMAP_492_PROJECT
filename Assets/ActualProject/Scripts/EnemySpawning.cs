@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class EnemySpawning : MonoBehaviour
 {
+    public Text waveText;
     public float spawnTimer;
     public GameObject enemyA;
     public GameObject enemyB;
@@ -74,13 +76,14 @@ public class EnemySpawning : MonoBehaviour
     {
         int chance = Random.Range(0, enemyType.Length);
 
-        if (chance > 6)
+        if (chance >= 6)
         {
             enemy = enemyB;
         }
         else
         {
             enemy = enemyA;
+            Debug.Log(chance);
         }
     }
 
@@ -89,12 +92,15 @@ public class EnemySpawning : MonoBehaviour
     void RoundDelay()
     {
         canSpawn = true;
+
+        waveText.text = "";
     }
+
 
 
     public void ResetSpawn(int wave)
     {
-        float roundDelay = 5f;
+        float roundDelay = 3f;
 
         canSpawn = false;
 
@@ -105,36 +111,38 @@ public class EnemySpawning : MonoBehaviour
         }
         else if (wave == 2)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5}; //14% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6}; //14% chance
             spawnTimer -= 0.5f; //1 second
             Debug.Log("wave 2 set");
         }
         else if (wave == 3)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6 }; //25% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }; //25% chance
             //1 second
             Debug.Log("wave 3 set");
         }
         else if (wave == 4)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }; //30% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 }; //30% chance
             spawnTimer -= 0.25f; //0.75 second
         }
         else if (wave == 5)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 }; //40% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; //40% chance
             spawnTimer -= 0.25f; //0.5 second
             Debug.Log("wave 5 set");
         }
         else if (wave == 6)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; //45% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; //45% chance
         }
         else if (wave > 6)
         {
-            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }; //50% chance
+            enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }; //50% chance
             Debug.Log("over wave 6");
         }
+
+        waveText.text = "Wave " + wave.ToString();
 
         Invoke("RoundDelay", roundDelay);
     }
