@@ -1,20 +1,33 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class WallControl : MonoBehaviour
 {
+    public Text restartText;
+    public Text gameOverText;
+
     //The wall's current health point total
     public int currentHealth = 3;
-    Material mat = new Material(Shader.Find("Standard"));
+    Material mat;
+
+    private GameObject[] enemies;
 
     void Start()
     {
+        //restart = false;
+        restartText.text = "";
+        gameOverText.text = "";
+        mat = new Material(Shader.Find("Standard"));
         MeshRenderer mr = gameObject.GetComponent<MeshRenderer>();
-        
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         mat.color = Color.white;
         //assign the material to renderer
         mr.material = mat;
     }
+
 
 
     public void Damage(int damageAmount)
@@ -27,6 +40,8 @@ public class WallControl : MonoBehaviour
         {
             //if health has fallen below zero, deactivate it 
             gameObject.SetActive(false);
+            
+            GameOver();
         }
         
         if (currentHealth >= 0)
@@ -51,5 +66,20 @@ public class WallControl : MonoBehaviour
         {
             mat.color = Color.red;
         }
+    }
+
+
+
+    void GameOver()
+    {
+        gameOverText.text = "Game Over!";
+
+        restartText.text = "Press 'R' to restart";
+
+        //restart = true;
+
+        
+        foreach (GameObject e in enemies)
+            Destroy(e);
     }
 }

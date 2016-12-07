@@ -34,6 +34,11 @@ public class BazookaControl : MonoBehaviour
             Destroy(currProjectile, projectileLifetime);
             timeToFire = fireTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("LongerHall");
+        }
     }
     /*
     void ChangeScene()

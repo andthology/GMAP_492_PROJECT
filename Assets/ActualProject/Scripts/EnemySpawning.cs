@@ -83,7 +83,6 @@ public class EnemySpawning : MonoBehaviour
         else
         {
             enemy = enemyA;
-            Debug.Log(chance);
         }
     }
 
@@ -107,19 +106,16 @@ public class EnemySpawning : MonoBehaviour
         if (wave == 1)
         {
             enemyType = new int[] { 0, 1, 2, 3, 4 }; //no chance
-            Debug.Log("wave 1 set");
         }
         else if (wave == 2)
         {
             enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6}; //14% chance
             spawnTimer -= 0.5f; //1 second
-            Debug.Log("wave 2 set");
         }
         else if (wave == 3)
         {
             enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7 }; //25% chance
             //1 second
-            Debug.Log("wave 3 set");
         }
         else if (wave == 4)
         {
@@ -130,7 +126,6 @@ public class EnemySpawning : MonoBehaviour
         {
             enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }; //40% chance
             spawnTimer -= 0.25f; //0.5 second
-            Debug.Log("wave 5 set");
         }
         else if (wave == 6)
         {
@@ -139,7 +134,6 @@ public class EnemySpawning : MonoBehaviour
         else if (wave > 6)
         {
             enemyType = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 }; //50% chance
-            Debug.Log("over wave 6");
         }
 
         waveText.text = "Wave " + wave.ToString();
