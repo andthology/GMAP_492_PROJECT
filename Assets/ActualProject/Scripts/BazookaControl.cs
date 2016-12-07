@@ -12,13 +12,14 @@ public class BazookaControl : MonoBehaviour
     public GameObject player;
 
     private float timeToFire;
-
+    private AudioSource laser;
 
 
     // Use this for initialization
     void Start()
     {
         timeToFire = 0f;
+        laser = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,6 +34,8 @@ public class BazookaControl : MonoBehaviour
             currProjectile.GetComponent<Rigidbody>().AddForce(muzzlePoint.up * shootForce);
             Destroy(currProjectile, projectileLifetime);
             timeToFire = fireTime;
+
+            laser.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.R))

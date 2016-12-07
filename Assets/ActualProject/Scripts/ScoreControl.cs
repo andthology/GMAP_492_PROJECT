@@ -14,6 +14,7 @@ public class ScoreControl : MonoBehaviour
 	public float timer;
 
     private EnemySpawning spawning;
+    private AudioSource waveStart;
 
 
 	void Start()
@@ -24,6 +25,7 @@ public class ScoreControl : MonoBehaviour
         //winText.text = "";
         //Locating the gameObject holding the EnemySpawning script in the scene
         spawning = GetComponent<EnemySpawning>();
+        waveStart = GetComponent<AudioSource>();
 
         StartNewRound();
     }
@@ -70,6 +72,8 @@ public class ScoreControl : MonoBehaviour
     void StartNewRound()
     {
         wave++;
+
+        waveStart.Play();
 
         spawning.ResetSpawn(wave);
 
