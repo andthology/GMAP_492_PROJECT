@@ -11,6 +11,6 @@ public class button_startgame : MonoBehaviour {
 	}
 
 	void TaskOnClick(){
-		UnityEngine.SceneManagement.SceneManager.LoadScene ("Main");
+		UnityEngine.SceneManagement.SceneManager.LoadScene ("LongerHall");
 	}
 }
