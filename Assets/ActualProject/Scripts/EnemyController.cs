@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     public int durability;
 	public int points;
 
+    private ParticleSystem explosion;
     private float distanceToTravel;
     private Vector3 targetPosition;
     private ScoreControl scoreScript;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
         targetPosition = new Vector3(transform.position.x, 0, transform.position.z + distanceToTravel);
 
+        explosion = GetComponent<ParticleSystem>();
         //Locating the gameObject holding the ScoreManager script in the scene
         scoreScript = GameObject.Find("GameManager").GetComponent<ScoreControl>();
     }
@@ -44,6 +46,7 @@ public class EnemyController : MonoBehaviour
             if (durability <= 0)
             {
                 Destroy(gameObject);
+                explosion.Play(true);
 
                 scoreScript.IncreaseScore(points);
             }

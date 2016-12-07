@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ActualProject/scenes/LongerHall.unity
+- path: Assets/ActualProject/scenes/start_screen.unity
   isLoaded: 1
   isActive: 1
